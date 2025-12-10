@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     # Your apps
     'apps.accounts',
     'apps.enrollees',
-    # 'apps.plans',
+    'apps.plans',
     # 'apps.providers',
     # 'apps.visits',
     # 'apps.referrals',

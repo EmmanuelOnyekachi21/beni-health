@@ -11,10 +11,8 @@ class User(AbstractUser):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     email = models.EmailField(unique=True, db_index=True)
     username = models.CharField(max_length=150, unique=True, null=True, blank=True)
+    # username = None
 
-    # Make email the username
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name']
     
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
@@ -22,7 +20,7 @@ class User(AbstractUser):
     last_login = models.DateTimeField(auto_now=True)
     
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name']
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'username']
 
     class Meta:
         db_table = 'users'
