@@ -1,0 +1,11 @@
+from rest_framework import serializers
+from apps.plans.models import Plan
+
+
+class PlanSerializer(serializers.ModelSerializer):
+    """
+    Serializer for Plan model
+    """
+    class Meta:
+        model = Plan
+        fields = "__all__"

@@ -96,12 +96,14 @@ class RegisterSerializer(serializers.ModelSerializer):
         """
         role = validated_data.pop('role')
         password = validated_data.pop('password')
-        if password and password.startswith('0'):
-            password = '+234' + password[1:]
         user = User(**validated_data)
         user.set_password(password)
         user.save()
-        user_profile = UserProfile.objects.create(user=user, role=role)
+        # UserProfile is created via signals or we need to create it here to trigger the signal?
+        # Wait, the signal is on UserProfile. So we MUST create UserProfile here.
+        # But we should NOT create the child profile (EmployerProfile, etc) here anymore.
+        
+        UserProfile.objects.create(user=user, role=role)
         return user
 
 

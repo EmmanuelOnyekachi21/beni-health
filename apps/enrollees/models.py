@@ -21,7 +21,7 @@ class Enrollees(models.Model):
     # Personal Information
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    dob = models.DateField(verbose_name="Date of Birth")
+    dob = models.DateField(verbose_name="Date of Birth", null=True, blank=True)
     gender = models.CharField(max_length=10, choices=[('M', 'Male'), ('F', 'Female')])
     phone = models.CharField(max_length=20, unique=True)
     email = models.EmailField(null=True, blank=True)
@@ -35,14 +35,15 @@ class Enrollees(models.Model):
         EmployerProfile,
         on_delete=models.SET_NULL,
         null=True,
+        blank=True,
         related_name='enrollees'
     )
 
-    plan = models.ForeignKey(Plan, on_delete=models.PROTECT, related_name='enrollees')
+    plan = models.ForeignKey(Plan, on_delete=models.PROTECT, related_name='enrollees', null=True, blank=True)
     
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='ACTIVE')
-    coverage_start = models.DateField()
-    coverage_end = models.DateField()
+    coverage_start = models.DateField(null=True, blank=True)
+    coverage_end = models.DateField(null=True, blank=True)
     
     # Metadata
     created_at = models.DateTimeField(auto_now_add=True)

@@ -26,7 +26,7 @@ class UserAdmin(BaseUserAdmin):
     # Use email as username
     fieldsets = (
         (None, {'fields': ('id', 'email', 'password')}),
-        (_('Personal Info'), {'fields': ('first_name', 'last_name', 'username')}),
+        (_('Personal Info'), {'fields': ('first_name', 'last_name')}),
         (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
         (_('Important Dates'), {'fields': ('last_login', 'date_joined')}),
     )
@@ -34,7 +34,7 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'first_name', 'last_name', 'username', 'password1', 'password2'),
+            'fields': ('email', 'first_name', 'last_name', 'password1', 'password2'),
         }),
     )
 
