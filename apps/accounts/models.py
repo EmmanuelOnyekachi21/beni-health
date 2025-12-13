@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 import uuid
 
 
+
 class User(AbstractUser):
     """
     Custom user model that extends Django's AbstractUser.
@@ -120,44 +121,6 @@ class EmployeeProfile(models.Model):
             f"{self.user_profile.user.get_full_name()} - "
             f"{self.employer.company_name if self.employer else 'No Employer'}"
         )
-
-
-class ProviderProfile(models.Model):
-    """
-    Additional information for Provider users.
-    One-to-one relationship with UserProfile model.
-    """
-    FACILITY_TYPES = (
-        ('HOSPITAL', 'Hospital'),
-        ('CLINIC', 'Clinic'),
-        ('DIAGNOSTIC', 'Diagnostic Center'),
-        ('PHARMACY', 'Pharmacy'),
-        ('SPECIALIST', 'Specialist Center'),
-    )
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user_profile = models.OneToOneField(UserProfile, on_delete=models.CASCADE, related_name='provider_profile')
-    facility_name = models.CharField(max_length=200)
-    facility_type = models.CharField(max_length=20, choices=FACILITY_TYPES)
-    license_number = models.CharField(max_length=100, null=True, blank=True)
-    accreditation_status = models.CharField(max_length=50, default='PENDING')
-
-    # Location
-    # address = models.JSONField(default=dict)
-    # latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
-    # longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
-
-    # Services
-    services_offered = models.JSONField(default=list)  # List of service codes
-
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        db_table = 'provider_profiles'
-    
-    def __str__(self):
-        return f"{self.facility_name} - {self.get_facility_type_display()}"
-
 
 class HMOProfile(models.Model):
     """

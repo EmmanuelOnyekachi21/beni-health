@@ -6,9 +6,9 @@ from .models import (
     UserProfile,
     EmployerProfile,
     EmployeeProfile,
-    ProviderProfile,
     HMOProfile,
 )
+from apps.providers.models import ProviderProfile
 
 
 # ------------------------

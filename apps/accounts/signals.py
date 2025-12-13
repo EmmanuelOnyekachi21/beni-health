@@ -4,10 +4,11 @@ from apps.accounts.models import (
     UserProfile,
     EmployerProfile,
     EmployeeProfile,
-    ProviderProfile,
     HMOProfile
 )
 from apps.enrollees.models import Enrollees
+from apps.providers.models import ProviderProfile
+
 
 @receiver(post_save, sender=UserProfile)
 def create_related_profile(sender, instance, created, **kwargs):
@@ -43,13 +44,6 @@ def create_related_profile(sender, instance, created, **kwargs):
                 
                 # Optional: Update the Enrollee record to link back to the user?
                 # For now, the link is established via the EmployeeProfile.
-        
-        elif instance.role == 'PROVIDER':
-            ProviderProfile.objects.create(
-                user_profile=instance,
-                facility_name=f"Facility for {instance.user.email}", # Placeholder
-                facility_type='HOSPITAL' # Default, user must update
-            )
             
         elif instance.role == 'HMO':
             HMOProfile.objects.create(

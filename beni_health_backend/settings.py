@@ -53,7 +53,7 @@ INSTALLED_APPS = [
     'apps.accounts',
     'apps.enrollees',
     'apps.plans',
-    # 'apps.providers',
+    'apps.providers',
     # 'apps.visits',
     # 'apps.referrals',
     # 'apps.claims',
